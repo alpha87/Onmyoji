@@ -1,15 +1,25 @@
+"""
+@Author: Jianxun
+@Email: i@lijianxun.top
+@File Name: tools.py
+@Description: 包含网易 MuMu 模拟器 adb 操作，腾讯云文字识别。
+
+"""
+
 import base64
 import json
 import os
 import random
 import time
-import tencentcloudKeys
+
 import cv2
 from loguru import logger
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.ocr.v20181119 import models, ocr_client
+
+import tencentcloudKeys
 
 
 class Tools(object):

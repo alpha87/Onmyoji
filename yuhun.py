@@ -1,6 +1,16 @@
-from tools import Tools
-from loguru import logger
+"""
+@Author: Jianxun
+@Email: i@lijianxun.top
+@File Name: yuhun.py
+@Description: 御魂，御灵，觉醒等相似界面的副本
+
+"""
+
 from random import randint
+
+from loguru import logger
+
+from tools import Tools
 
 
 def run(number):

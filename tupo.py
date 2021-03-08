@@ -1,6 +1,16 @@
+"""
+@Author: Jianxun
+@Email: i@lijianxun.top
+@File Name: tupo.py
+@Description: 结界突破
+
+"""
+
 from random import choice, shuffle
-from tools import Tools
+
 from loguru import logger
+
+from tools import Tools
 
 
 class TuPo(object):

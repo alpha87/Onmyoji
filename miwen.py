@@ -1,6 +1,16 @@
-from tools import Tools
-from loguru import logger
+"""
+@Author: Jianxun
+@Email: i@lijianxun.top
+@File Name: miwen.py
+@Description: 每周秘闻副本。默认从第一次开始，共十次。
+
+"""
+
 from random import randint
+
+from loguru import logger
+
+from tools import Tools
 
 
 def run():
