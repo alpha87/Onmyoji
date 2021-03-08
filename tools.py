@@ -74,6 +74,7 @@ class Tools(object):
             random.randint(-3, 3) + y1,
             random.randint(-3, 3) + x2,
             random.randint(-3, 3) + y2))
+        self.sleep(random.randint(2, 3))  # 电脑太卡，多等了一会
 
     def capture_screen(self):
         """屏幕截图"""
