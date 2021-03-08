@@ -1,1 +1,1 @@
-/data/screen.png: 1 file pulled, 0 skipped. 2.7 MB/s (459460 bytes in 0.160s)
+/data/screen.png: 1 file pulled, 0 skipped. 2.2 MB/s (597117 bytes in 0.254s)

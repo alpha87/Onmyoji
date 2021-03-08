@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 tencentcloudKeys.py
+temp.txt
 
 # C extensions
 *.so
