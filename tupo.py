@@ -84,6 +84,7 @@ class TuPo(object):
                         self.tools.tap(28, 26, "找到退出按钮")
                         self.tools.tap(592, 338, "点击退出按钮")
                         self.tools.tap(408, 143, "退出")
+                        self.tools.sleep(2)
                         break
                     self.tools.sleep(1)
                 n += 1
