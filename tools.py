@@ -30,6 +30,7 @@ class Tools(object):
         self.project_path = os.path.dirname(os.path.abspath(__file__))
         self.paths = {
             "qianshengli": os.path.join(self.project_path, "img", "qianshengli.bmp"),
+            "jingong": os.path.join(self.project_path, "img", "jingong.bmp"),
             "shengli": os.path.join(self.project_path, "img", "shengli.bmp"),
             "zhunbei": os.path.join(self.project_path, "img", "zhunbei.bmp"),
             "screen": os.path.join(self.project_path, "img", "screen.png"),

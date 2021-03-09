@@ -61,7 +61,16 @@ class TuPo(object):
             self.tools.tap(x, y, "点击结界")
 
             # 点击进攻按钮
-            self.tools.tap(xj, yj, "点击进攻按钮")
+            while True:
+                self.tools.capture_screen()
+                match_result = self.tools.match_img(
+                    capture_img=self.tools.paths["screen"],
+                    temp_img=self.tools.paths["jingong"]
+                )
+                if match_result:
+                    self.tools.tap(xj, yj, "点击进攻按钮")
+                    break
+                self.tools.sleep(1)
 
             if n == 0:
                 # 寻找退出按钮
