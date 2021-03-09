@@ -1,4 +1,4 @@
-# 阴阳师全平台辅助（网易 MuMu 模拟器）
+# 阴阳师后台全平台辅助（网易 MuMu 模拟器）
 
 ![screen](https://i.loli.net/2020/10/23/fMiRr75uF93t2o8.jpg)
 
