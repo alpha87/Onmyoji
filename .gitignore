@@ -1,9 +1,11 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+test/
 *.py[cod]
 *$py.class
 tencentcloudKeys.py
 temp.txt
+.DS_Store
 
 # C extensions
 *.so
