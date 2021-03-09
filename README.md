@@ -1,23 +1,30 @@
-# 阴阳师后台全平台辅助（网易 MuMu 模拟器）
+![](https://i.loli.net/2020/06/17/ZpwDfJmCGEoKqnb.png)
+
+# 阴阳师后台全平台辅助
 
 ![screen](https://i.loli.net/2020/10/23/fMiRr75uF93t2o8.jpg)
 
 - Python 版本：Python 3.8.3
-- 模拟器：网易 MuMu
+- 模拟器：[网易 MuMu](http://mumu.163.com/) ｜ [雷电模拟器](https://www.ldmnq.com/) 
 - 模拟器分辨率：1024*576
 - 显卡渲染模式：**兼容（OpenGL）**
+- **兼容 Windows 系统和 MacOS 系统**
 
 ## 思路：
 
-**利用 adb 截图后，使用 opencv 找图找色，模拟点击。因为使用 adb 操作模拟器，所以相当于后台操作。**
+**利用 adb 截图后，使用 opencv 找图找色，模拟点击。使用 adb 操作模拟器，相当于后台操作。**
 
-**因为我主要为了刷勾玉，所以侧重地域鬼王，结界突破和秘闻副本，御魂是用来刷突破券的。**
+**我主要为了刷勾玉，所以此工具更侧重地域鬼王，结界突破和秘闻副本，御魂是用来刷突破券的。**
 
-**结界突破会主动失败一次（失败难度不会增加），为了刷排名和勾玉。**
+**为了防止收到鬼使黑的来信，所以增加随机等待的时间比较多，每次随机等待 2-3 秒，导致整体运行速度稍微慢了一些。**
 
-**为了防止收到鬼使黑的来信，所以增加随机等待的时间比较多，速度稍微慢了一些。**
+**此工具适合放在后台干其他工作的同学使用。也比较符合我个人的使用。**
 
-**适合放在后台干其他工作的同学使用。比较符合我个人的使用。**
+------
+
+**地域鬼王**需要先把姑获鸟，以津真天和山童收藏。
+
+![收藏](https://i.loli.net/2021/03/09/7GMZelLvspbiIDu.jpg)
 
 **结界突破**主要是把九宫格的坐标保存到列表，使用 `shuffle` 方法随机打乱，然后循环执行。
 
@@ -25,13 +32,11 @@
 
 每突破三次会领取一次奖励，等待九次全部完成后，会把右上角突破剩余数量截图上传到腾讯 OCR 识别接口，如果剩余次数大于等于九次，递归执行，否则停止执行。
 
-**地域鬼王需要先把姑获鸟，以津真天和山童收藏。**
-
 > 腾讯 OCR 每月有一千次免费次数。如果只是识别结界券使用，应该是够用了，如果不够用可以按需付费或者自建字典识别。
 
 ![突破剩余数量](https://i.loli.net/2020/10/23/3nSe5p8YMi9LlTw.png)
 
-这一步需要申请[腾讯云文字识别 OCR](https://cloud.tencent.com/product/ocr-catalog) 的 secretId 和 secretKey。
+这一步需要申请 [腾讯云文字识别 OCR](https://cloud.tencent.com/product/ocr-catalog) 的 secretId 和 secretKey。
 
 然后新建文件 `tencentcloudKeys.py`，写入：
 
@@ -41,9 +46,11 @@ secretId = "AKI***********************aYHDtmaOw"
 secretKey = "Sg**************************QdZ7X"
 ```
 
-## 网易 MuMu 模拟器版
+## 模拟器版
 
-部分操作参考[网易 MuMu 开发者必备说明书](http://mumu.163.com/help/func/20190129/30131_797867.html) 。
+部分操作参考 [网易 MuMu 开发者必备说明书](http://mumu.163.com/help/func/20190129/30131_797867.html) 和 [【雷神命令】常用adb命令整理贴](https://www.ldmnq.com/forum/thread-32-1-1.html) 。
+
+建议直接看雷神模拟器社区的命令整理，比较详细。
 
 ### 运行阴阳师
 
@@ -188,3 +195,7 @@ adb shell am start --user 10 com.netease.android.cloudgame/com.netease.android.c
 ```
 
 切换之后就可以继续操作了。
+
+### 赞赏
+
+<div align=center><img width="260" height="260" src="https://i.loli.net/2021/01/12/ykHU2RSXoCZFfxr.jpg"></div>
