@@ -11,6 +11,7 @@ import json
 import os
 import random
 import time
+from subprocess import PIPE, run
 
 import cv2
 from loguru import logger
@@ -89,7 +90,7 @@ class Tools(object):
         ]
         for _cmd in screen_cmd:
             self.sleep(n=0.1)
-            os.system("{} > {}".format(_cmd, self.paths['temp_file']))
+            run(_cmd, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         logger.debug("刷新截图文件")
 
     def find_img(self, path, x, y, log):
