@@ -48,16 +48,18 @@ class Tools(object):
         logger.debug("连接设备：{}".format(cmd))
 
     @staticmethod
-    def sleep(n):
+    def sleep(n=0.0):
         """暂停 n 秒"""
 
+        if not n:
+            n = random.randint(1, 3)
         logger.debug("暂停{}秒".format(n))
         time.sleep(n)
 
     def tap(self, x: int, y: int, _log=None):
         """点击屏幕"""
 
-        self.sleep(random.randint(2, 3))
+        self.sleep()
         if _log:
             logger.info(_log)
         os.system(
@@ -69,23 +71,24 @@ class Tools(object):
     def swipe(self, x1: int, y1: int, x2: int, y2: int):
         """滑动屏幕"""
 
-        self.sleep(random.randint(1, 3))
+        self.sleep()
         os.system("adb shell input swipe {} {} {} {} 500".format(
             random.randint(-3, 3) + x1,
             random.randint(-3, 3) + y1,
             random.randint(-3, 3) + x2,
             random.randint(-3, 3) + y2))
-        self.sleep(random.randint(2, 3))  # 电脑太卡，多等了一会
+        self.sleep()
 
     def capture_screen(self):
         """屏幕截图"""
 
         screen_cmd = [
             "adb shell screencap /data/screen.png",
-            "adb pull /data/screen.png " + self.paths["screen"]
+            "adb pull /data/screen.png " + self.paths["screen"],
+            "adb shell rm /data/screen.png"
         ]
         for _cmd in screen_cmd:
-            self.sleep(0.5)
+            self.sleep(n=0.1)
             os.system("{} > {}".format(_cmd, self.paths['temp_file']))
         logger.debug("刷新截图文件")
 
@@ -101,7 +104,7 @@ class Tools(object):
             if match_result:
                 self.tap(x, y, log)
                 break
-            self.sleep(2)
+            self.sleep()
 
     @staticmethod
     def match_img(capture_img, temp_img):
