@@ -45,8 +45,8 @@ class Tools(object):
         """连接设备"""
 
         cmd = "adb connect 127.0.0.1:7555"
-        os.system(cmd)
-        logger.debug("连接设备：{}".format(cmd))
+        run(cmd, universal_newlines=True, shell=True)
+        logger.debug("连接设备")
 
     @staticmethod
     def sleep(n=0.0):
@@ -63,21 +63,23 @@ class Tools(object):
         self.sleep()
         if _log:
             logger.info(_log)
-        os.system(
-            "adb shell input tap {} {}".format(
-                random.randint(-5, 5) + x,
-                random.randint(-5, 5) + y)
-        )
+        run("adb shell input tap {} {}".format(
+            random.randint(-5, 5) + x,
+            random.randint(-5, 5) + y),
+            universal_newlines=True,
+            shell=True)
 
     def swipe(self, x1: int, y1: int, x2: int, y2: int):
         """滑动屏幕"""
 
         self.sleep()
-        os.system("adb shell input swipe {} {} {} {} 500".format(
+        run("adb shell input swipe {} {} {} {} 500".format(
             random.randint(-3, 3) + x1,
             random.randint(-3, 3) + y1,
             random.randint(-3, 3) + x2,
-            random.randint(-3, 3) + y2))
+            random.randint(-3, 3) + y2),
+            universal_newlines=True,
+            shell=True)
         self.sleep()
 
     def capture_screen(self):
@@ -90,7 +92,8 @@ class Tools(object):
         ]
         for _cmd in screen_cmd:
             self.sleep(n=0.1)
-            run(_cmd, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+            run(_cmd, stdout=PIPE, stderr=PIPE,
+                universal_newlines=True, shell=True)
         logger.debug("刷新截图文件")
 
     def find_img(self, path, x, y, log):
