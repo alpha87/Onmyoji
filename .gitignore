@@ -6,6 +6,8 @@ test/
 tencentcloudKeys.py
 temp.txt
 .DS_Store
+img/num.png
+img/screen.png
 
 # C extensions
 *.so
