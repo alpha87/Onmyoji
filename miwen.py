@@ -29,7 +29,7 @@ def run():
 
         # 寻找胜利按钮
         tools.find_img(
-            path=tools.paths["shengli"],
+            path=tools.paths["qianshengli"],
             x=416, y=83, log="点击胜利按钮")
 
         tools.sleep(randint(2, 5))
