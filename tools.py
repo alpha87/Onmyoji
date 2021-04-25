@@ -108,7 +108,7 @@ class Tools(object):
             if match_result:
                 self.tap(x, y, log)
                 break
-            self.sleep()
+            self.sleep(0.5)
 
     @staticmethod
     def match_img(capture_img, temp_img):
@@ -117,6 +117,8 @@ class Tools(object):
         img1 = cv2.imread(capture_img)
         img2 = cv2.imread(temp_img)
         result = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        logger.debug("{}\n{}\n{}\n{}".format(min_val, max_val, min_loc, max_loc))
         if result.max() > 0.9:
             return True
         return False
