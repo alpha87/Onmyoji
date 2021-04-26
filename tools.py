@@ -29,6 +29,7 @@ class Tools(object):
     def __init__(self):
         self.get_devices()
         self.project_path = os.path.dirname(os.path.abspath(__file__))
+        self.flag = False
         self.paths = {
             "qianshengli": os.path.join(self.project_path, "img", "qianshengli.bmp"),
             "jingong": os.path.join(self.project_path, "img", "jingong.bmp"),
@@ -60,7 +61,7 @@ class Tools(object):
     def tap(self, x: int, y: int, _log=None):
         """点击屏幕"""
 
-        self.sleep(random.randint(3, 4))
+        self.sleep(random.randint(2, 4))
         if _log:
             logger.info(_log)
         run("adb shell input tap {} {}".format(
@@ -90,22 +91,32 @@ class Tools(object):
             "adb pull /data/screen.png " + self.paths["screen"],
             "adb shell rm /data/screen.png"
         ]
+        self.sleep(0.5)
         for _cmd in screen_cmd:
             self.sleep(n=0.1)
             run(_cmd, stdout=PIPE, stderr=PIPE,
                 universal_newlines=True, shell=True)
+        self.sleep(0.5)
         logger.debug("刷新截图文件")
 
-    def find_img(self, path, x, y, log):
+    def find_img(self, path, x, y, log, thread_flag=False):
         """找图"""
 
         while True:
+            if self.flag and thread_flag:
+                logger.debug("已经匹配到其中一张图，退出...")
+                self.flag = False
+                self.sleep(0.5)
+                break
+
             self.capture_screen()
             match_result = self.match_img(
                 capture_img=self.paths["screen"],
                 temp_img=path
             )
             if match_result:
+                if thread_flag:
+                    self.flag = True
                 self.tap(x, y, log)
                 break
             self.sleep(0.5)
