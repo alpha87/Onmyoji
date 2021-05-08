@@ -70,7 +70,7 @@ class DiYu(object):
             x=700, y=400, log="胜利")
 
         self.tools.tap(925, 88, "退出\n{} - 结束".format(name))
-        self.tools.sleep(2)
+        self.tools.sleep(4)
 
     def beat(self):
         # ------------------------------------------------ #
