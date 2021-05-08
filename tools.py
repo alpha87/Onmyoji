@@ -61,7 +61,7 @@ class Tools(object):
     def tap(self, x: int, y: int, _log=None):
         """点击屏幕"""
 
-        self.sleep(random.randint(2, 4))
+        self.sleep(random.randint(1, 3))
         if _log:
             logger.info(_log)
         run("adb shell input tap {} {}".format(
