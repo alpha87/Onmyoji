@@ -120,7 +120,7 @@ class TuPo(object):
         for loc in loc_list:
             n += 1
             self.tools.sleep(1)
-            logger.info("第{}次突破".format(n))
+            logger.success("第{}次突破".format(n))
             self.beat(loc)
 
             if n in (3, 6, 9):
