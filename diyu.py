@@ -21,16 +21,16 @@ class DiYu(object):
         # 右上角 筛选
         self.shaixuan = (906, 37)
 
-        # 收藏
-        self.shoucang = (969, 459)
+        # 热门
+        self.shoucang = (969, 363)
 
-        # 姑获鸟
+        # 姑获鸟 （选择第一个）
         self.guhuoniao = (812, 208)
 
-        # 以津真天
+        # 以津真天 （选择第二个）
         self.yijin = (807, 312)
 
-        # 山童
+        # 山童 （选择第三个）
         self.shantong = (822, 417)
 
         # 挑战
