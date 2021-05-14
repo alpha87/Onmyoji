@@ -58,10 +58,14 @@ class Tools(object):
         logger.debug("暂停{}秒".format(n))
         time.sleep(n)
 
+    @staticmethod
+    def launch_onmyoji():
+        run("adb shell am start -n com.netease.onmyoji.netease_simulator/com.netease.onmyoji.Client")
+        logger.debug("启动阴阳师")
+
     def tap(self, x: int, y: int, _log=None):
         """点击屏幕"""
 
-        self.sleep(random.randint(1, 3))
         if _log:
             logger.info(_log)
         run("adb shell input tap {} {}".format(
@@ -69,6 +73,7 @@ class Tools(object):
             random.randint(-5, 5) + y),
             universal_newlines=True,
             shell=True)
+        self.sleep(random.randint(1, 3))
 
     def swipe(self, x1: int, y1: int, x2: int, y2: int):
         """滑动屏幕"""
@@ -129,7 +134,7 @@ class Tools(object):
         img2 = cv2.imread(temp_img)
         result = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-        logger.debug("{}\n{}\n{}\n{}".format(min_val, max_val, min_loc, max_loc))
+        logger.debug("截图对比:\n{}\n{}\n{}\n{}".format(min_val, max_val, min_loc, max_loc))
         if result.max() > 0.9:
             return True
         return False
