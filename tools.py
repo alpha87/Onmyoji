@@ -33,6 +33,7 @@ class Tools(object):
         self.paths = {
             "qianshengli": os.path.join(self.project_path, "img", "qianshengli.bmp"),
             "jingong": os.path.join(self.project_path, "img", "jingong.bmp"),
+            "tiaozhan": os.path.join(self.project_path, "img", "tiaozhan.bmp"),
             "shengli": os.path.join(self.project_path, "img", "shengli.bmp"),
             "zhunbei": os.path.join(self.project_path, "img", "zhunbei.bmp"),
             "screen": os.path.join(self.project_path, "img", "screen.png"),
@@ -73,7 +74,7 @@ class Tools(object):
             random.randint(-5, 5) + y),
             universal_newlines=True,
             shell=True)
-        self.sleep(random.randint(1, 3))
+        self.sleep(random.randint(2, 4))
 
     def swipe(self, x1: int, y1: int, x2: int, y2: int):
         """滑动屏幕"""
