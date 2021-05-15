@@ -69,7 +69,30 @@ class DiYu(object):
             path=self.tools.paths["shengli"],
             x=700, y=400, log="胜利")
 
-        self.tools.tap(925, 88, "退出\n{} - 结束".format(name))
+        search_num = 0
+
+        # 寻找进攻按钮的次数，当前设定 3，
+        search_total = 3
+
+        while True:
+            self.tools.capture_screen()
+            # 点击进攻按钮
+            match_result = self.tools.match_img(
+                capture_img=self.tools.paths["screen"],
+                temp_img=self.tools.paths["tiaozhan"]
+            )
+            if match_result:
+                self.tools.tap(925, 88, "退出\n{} - 结束".format(name))
+                break
+
+            if search_num == search_total:
+                logger.warning("匹配超时，自动跳过当前操作")
+                break
+
+            search_num += 1
+            logger.debug(f"第{search_num}次匹配图像")
+            self.tools.sleep(1)
+
         self.tools.sleep(4)
 
     def beat(self):
