@@ -60,9 +60,13 @@ class TuPo(object):
             # 点击结界
             self.tools.tap(x, y, "点击结界")
 
-            # 点击进攻按钮
+            # 判断结界是否手动操作过
+            search_num = 0
+            # 寻找进攻按钮的次数，当前设定 3，
+            search_total = 3
             while True:
                 self.tools.capture_screen()
+                # 点击进攻按钮
                 match_result = self.tools.match_img(
                     capture_img=self.tools.paths["screen"],
                     temp_img=self.tools.paths["jingong"]
@@ -70,7 +74,18 @@ class TuPo(object):
                 if match_result:
                     self.tools.tap(xj, yj, "点击进攻按钮")
                     break
+
+                if search_num == search_total:
+                    break
+
+                search_num += 1
+                logger.debug(f"第{search_num}次匹配图像")
+
                 self.tools.sleep(1)
+
+            if search_num == search_total:
+                logger.warning("匹配超时，自动跳过当前操作")
+                break
 
             if n == 0:
                 # 寻找退出按钮
