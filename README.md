@@ -1,13 +1,11 @@
-![](https://i.loli.net/2020/06/17/ZpwDfJmCGEoKqnb.png)
-
 # 阴阳师后台全平台辅助
 
 ![screen](https://i.loli.net/2020/10/23/fMiRr75uF93t2o8.jpg)
 
-- Python 版本：Python 3.8.3
-- 模拟器：[网易 MuMu](http://mumu.163.com/) ｜ [雷电模拟器（推荐）](https://www.ldmnq.com/) 
-- 模拟器分辨率：1024*576
-- 显卡渲染模式：**兼容（OpenGL）**
+- Python 版本：Python 3.8
+- 模拟器：[网易 MuMu](http://mumu.163.com/) ｜ [雷电模拟器（推荐）](https://www.ldmnq.com/)
+- 模拟器分辨率：**1024*576**
+- 网易 MuMu 显卡渲染模式：**兼容（OpenGL）**
 - **兼容 Windows 系统和 MacOS 系统（不太友好）**
 
 ## 个人使用顺序
@@ -22,7 +20,7 @@
 
 **为了防止收到鬼使黑的来信，所以增加随机等待的时间比较多，每次随机等待 2-3 秒，导致整体运行速度稍微慢了一些。**
 
-**此工具适合放在后台干其他工作的同学使用。也比较符合我个人的使用。**
+**此工具适合放在后台干其他工作的同学使用。观赏价值不高。**
 
 ------
 
@@ -120,11 +118,11 @@ import cv2
 def p():
     capture_img = ""  # 程序运行时的截图
     temp_img = ""  # 已经保存好的图片
-    
+
     img1 = cv2.imread(capture_img)
     img2 = cv2.imread(temp_img)
     result = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED)
-    
+
     if result.max() > 0.9:
         return True
 ```
