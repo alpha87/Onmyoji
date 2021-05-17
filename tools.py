@@ -31,7 +31,8 @@ class Tools(object):
         self.project_path = os.path.dirname(os.path.abspath(__file__))
         self.flag = False
         self.paths = {
-            "qianshengli": os.path.join(self.project_path, "img", "qianshengli.bmp"),
+            "qianshengli": os.path.join(self.project_path, "img",
+                                        "qianshengli.bmp"),
             "jingong": os.path.join(self.project_path, "img", "jingong.bmp"),
             "tiaozhan": os.path.join(self.project_path, "img", "tiaozhan.bmp"),
             "shengli": os.path.join(self.project_path, "img", "shengli.bmp"),
@@ -44,11 +45,13 @@ class Tools(object):
 
     @staticmethod
     def get_devices():
-        """连接设备"""
+        """连接设备，调整分辨率"""
 
-        cmd = "adb connect 127.0.0.1:7555"
-        run(cmd, universal_newlines=True, shell=True)
-        logger.debug("连接设备")
+        cmd_connect = "adb connect 127.0.0.1:7555"
+        cmd_size = "adb shell wm size 1024x576"
+        run(cmd_connect, universal_newlines=True, shell=True)
+        run(cmd_size, universal_newlines=True, shell=True)
+        logger.debug("\n连接设备，分辨率调整为 1024*576\n建议使用「雷电模拟器」")
 
     @staticmethod
     def sleep(n=0.0):
@@ -58,11 +61,6 @@ class Tools(object):
             n = random.randint(1, 3)
         logger.debug("暂停{}秒".format(n))
         time.sleep(n)
-
-    @staticmethod
-    def launch_onmyoji():
-        run("adb shell am start -n com.netease.onmyoji.netease_simulator/com.netease.onmyoji.Client")
-        logger.debug("启动阴阳师")
 
     def tap(self, x: int, y: int, _log=None):
         """点击屏幕"""
@@ -97,12 +95,12 @@ class Tools(object):
             "adb pull /data/screen.png " + self.paths["screen"],
             "adb shell rm /data/screen.png"
         ]
-        self.sleep(0.5)
+        self.sleep(0.1)
         for _cmd in screen_cmd:
             self.sleep(n=0.1)
             run(_cmd, stdout=PIPE, stderr=PIPE,
                 universal_newlines=True, shell=True)
-        self.sleep(0.5)
+        self.sleep(0.1)
         logger.debug("刷新截图文件")
 
     def find_img(self, path, x, y, log, thread_flag=False):
@@ -125,7 +123,7 @@ class Tools(object):
                     self.flag = True
                 self.tap(x, y, log)
                 break
-            self.sleep(0.5)
+            self.sleep(0.2)
 
     @staticmethod
     def match_img(capture_img, temp_img):
@@ -135,7 +133,8 @@ class Tools(object):
         img2 = cv2.imread(temp_img)
         result = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-        logger.debug("截图对比:\n{}\n{}\n{}\n{}".format(min_val, max_val, min_loc, max_loc))
+        logger.debug(
+            "截图对比:\n{}\n{}\n{}\n{}".format(min_val, max_val, min_loc, max_loc))
         if result.max() > 0.9:
             return True
         return False
