@@ -12,8 +12,9 @@ from tools import Tools
 
 
 class DiYu(object):
-    __doc__ = "每日地域鬼王，默认姑获鸟，山童，以津真天。" \
-              "需要先收藏姑获鸟，山童，以津真天。"
+    __doc__ = "每日地域鬼王，默认使用热门"
+
+    # TODO 重写鬼王代码,尽量每一步都有图片识别，并且能识别场景
 
     def __init__(self):
         self.tools = Tools()
@@ -96,49 +97,48 @@ class DiYu(object):
         self.tools.sleep(4)
 
     def beat(self):
-        # ------------------------------------------------ #
-
-        # 姑获鸟
+        # 如果点地域鬼王出现新挑战鬼王，自动关闭
+        self.tools.capture_screen()
+        _color = self.tools.get_pixel(46, 47)
+        logger.debug(f"像素：{_color}")
+        if _color == (140, 144, 159):
+            self.tools.tap(self.shaixuan[0], self.shaixuan[1])
 
         self.tools.tap(self.shaixuan[0], self.shaixuan[1], "点击【筛选】")
 
-        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【收藏】")
+        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【热门】")
 
-        self.tools.tap(self.guhuoniao[0], self.guhuoniao[1], "点击【姑获鸟】")
+        self.tools.tap(self.guhuoniao[0], self.guhuoniao[1], "点击【鬼王】")
 
         self.difficulty_adjustment()
 
         self.tools.tap(self.tiaozhan[0], self.tiaozhan[1], "点击挑战")
 
-        self.process("姑获鸟")
+        self.process("鬼王")
 
         # ------------------------------------------------ #
 
-        # 以津真天
-
         self.tools.tap(self.shaixuan[0], self.shaixuan[1], "点击【筛选】")
 
-        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【收藏】")
+        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【热门】")
 
-        self.tools.tap(self.yijin[0], self.yijin[1], "点击【以津真天】")
+        self.tools.tap(self.yijin[0], self.yijin[1], "点击【鬼王】")
 
         self.tools.tap(self.tiaozhan[0], self.tiaozhan[1], "点击挑战")
 
-        self.process("以津真天")
+        self.process("鬼王")
 
         # ------------------------------------------------ #
 
-        # 山童
-
         self.tools.tap(self.shaixuan[0], self.shaixuan[1], "点击【筛选】")
 
-        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【收藏】")
+        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【热门】")
 
-        self.tools.tap(self.shantong[0], self.shantong[1], "点击【山童】")
+        self.tools.tap(self.shantong[0], self.shantong[1], "点击【鬼王】")
 
         self.tools.tap(self.tiaozhan[0], self.tiaozhan[1], "点击挑战")
 
-        self.process("山童")
+        self.process("鬼王")
 
 
 if __name__ == '__main__':
