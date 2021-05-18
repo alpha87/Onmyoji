@@ -14,6 +14,8 @@ import time
 from subprocess import PIPE, run
 
 import cv2
+import numpy as np
+from PIL import Image
 from loguru import logger
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
@@ -39,8 +41,18 @@ class Tools(object):
             "zhunbei": os.path.join(self.project_path, "img", "zhunbei.bmp"),
             "screen": os.path.join(self.project_path, "img", "screen.png"),
             "num": os.path.join(self.project_path, "img", "num.png"),
+            "shaixuan": os.path.join(self.project_path, "img", "shaixuan.png"),
+            "remen": os.path.join(self.project_path, "img", "remen.png"),
             "screen_files": os.path.join(self.project_path, "img"),
             "temp_file": os.path.join(self.project_path, "temp.txt")
+        }
+        self.location_dict = {
+            # 胜利坐标
+            "shengli": (455, 391, 555, 481),
+            # 筛选
+            "shaixuan": (896, 28, 914, 46),
+            # 热门
+            "remen": (950, 318, 983, 405)
         }
 
     @staticmethod
@@ -100,7 +112,7 @@ class Tools(object):
             self.sleep(n=0.1)
             run(_cmd, stdout=PIPE, stderr=PIPE,
                 universal_newlines=True, shell=True)
-        self.sleep(0.1)
+        self.sleep(0.3)
         logger.debug("刷新截图文件")
 
     def find_img(self, path, x, y, log, thread_flag=False):
@@ -138,6 +150,26 @@ class Tools(object):
         if result.max() > 0.9:
             return True
         return False
+
+    def crop_screenshot(self, region):
+        self.capture_screen()
+        img = Image.open(self.paths["screen"])
+        cropImg = img.crop(self.location_dict[region])
+        cropImg.save("img/{}.png".format(region))
+        logger.debug("截图已保存")
+
+
+    def check_scene(self, scene_name):
+        self.capture_screen()
+        img = Image.open(self.paths["screen"])
+        scene_region =self.location_dict[scene_name]
+        crop_img = np.array(img.crop(scene_region))
+        scene_asset = np.array(Image.open(self.paths[scene_name]))
+        result = np.array_equal(scene_asset, crop_img)
+        logger.debug(result)
+        if result:
+            logger.debug("正确匹配到图片！")
+        return result
 
     def get_pixel(self, x, y):
         """获取截图中坐标对应像素值"""
@@ -179,3 +211,8 @@ class Tools(object):
         result_text = result["TextDetections"][0]["DetectedText"]
         result_text = int(result_text.split("/")[0].replace(" ", ""))
         return result_text
+
+
+if "__main__" == __name__:
+    t = Tools()
+    t.crop_screenshot("remen")
