@@ -104,9 +104,11 @@ class DiYu(object):
         if _color == (140, 144, 159):
             self.tools.tap(self.shaixuan[0], self.shaixuan[1])
 
-        self.tools.tap(self.shaixuan[0], self.shaixuan[1], "点击【筛选】")
+        if self.tools.check_scene("shaixuan"):
+            self.tools.tap(self.shaixuan[0], self.shaixuan[1], "点击【筛选】")
 
-        self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【热门】")
+        if self.tools.check_scene("remen"):
+            self.tools.tap(self.shoucang[0], self.shoucang[1], "点击【热门】")
 
         self.tools.tap(self.guhuoniao[0], self.guhuoniao[1], "点击【鬼王】")
 
