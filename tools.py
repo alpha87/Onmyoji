@@ -114,37 +114,34 @@ class Tools(object):
         self.sleep(0.2)
         logger.debug("刷新截图文件")
 
-    def find_img_miwen(self, paths, x, y, log):
+    def find_img(self, path, x, y, log):
         """秘闻副本找图"""
 
-        result = True
-        while result:
-            self.capture_screen()
-            for path in paths:
+        if isinstance(path, list):
+            result = True
+            while result:
+                self.capture_screen()
+                for item in path:
+                    match_result = self.match_img(
+                        capture_img=self.paths["screen"],
+                        temp_img=item)
+                    if match_result:
+                        result = False
+                        logger.debug("匹配到其中一张图，退出...")
+                        self.tap(x, y, log)
+                        break
+                    self.sleep(0.1)
+                self.sleep(0.2)
+        else:
+            while True:
+                self.capture_screen()
                 match_result = self.match_img(
                     capture_img=self.paths["screen"],
-                    temp_img=path
-                )
+                    temp_img=path)
                 if match_result:
-                    result = False
-                    logger.debug("匹配到其中一张图，退出...")
                     self.tap(x, y, log)
                     break
-                self.sleep(0.1)
-            self.sleep(0.2)
-
-    def find_img(self, path, x, y, log):
-        """找图"""
-
-        while True:
-            self.capture_screen()
-            match_result = self.match_img(
-                capture_img=self.paths["screen"],
-                temp_img=path)
-            if match_result:
-                self.tap(x, y, log)
-                break
-            self.sleep(0.2)
+                self.sleep(0.2)
 
     @staticmethod
     def match_img(capture_img, temp_img):
