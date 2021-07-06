@@ -1,12 +1,13 @@
 # 阴阳师后台全平台辅助
 
-![screen](https://i.loli.net/2020/10/23/fMiRr75uF93t2o8.jpg)
+![screen](https://i.loli.net/2021/07/06/XMYBNbmcJZlR6rH.jpg)
 
 - Python 版本：Python 3.8
 - 模拟器：[雷电模拟器（推荐）](https://www.ldmnq.com/)｜[网易 MuMu](http://mumu.163.com/)  
 - 模拟器分辨率：**`1024*576`**
 - 网易 MuMu 显卡渲染模式：**兼容（OpenGL）**
 - **兼容 Windows 系统和 MacOS 系统（不太友好，发热严重且需要重新截图）**
+- **🍒 下载「彩云天气」APP，输入我的邀请码：`24066808`，领取最高一年 SVIP。**
 
 ## 个人使用顺序
 

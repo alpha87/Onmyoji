@@ -31,7 +31,6 @@ class Tools(object):
     def __init__(self):
         self.get_devices()
         self.project_path = os.path.dirname(os.path.abspath(__file__))
-        self.flag = False
         self.paths = {
             "qianshengli": os.path.join(self.project_path, "img",
                                         "qianshengli.bmp"),
@@ -112,30 +111,37 @@ class Tools(object):
             self.sleep(n=0.1)
             run(_cmd, stdout=PIPE, stderr=PIPE,
                 universal_newlines=True, shell=True)
-        self.sleep(0.3)
+        self.sleep(0.2)
         logger.debug("刷新截图文件")
 
-    def find_img(self, path, x, y, log, thread_flag=False):
-        """找图"""
+    def find_img(self, path, x, y, log):
+        """秘闻副本找图"""
 
-        while True:
-            if self.flag and thread_flag:
-                logger.debug("已经匹配到其中一张图，退出...")
-                self.flag = False
-                self.sleep(0.5)
-                break
-
-            self.capture_screen()
-            match_result = self.match_img(
-                capture_img=self.paths["screen"],
-                temp_img=path
-            )
-            if match_result:
-                if thread_flag:
-                    self.flag = True
-                self.tap(x, y, log)
-                break
-            self.sleep(0.2)
+        if isinstance(path, list):
+            result = True
+            while result:
+                self.capture_screen()
+                for item in path:
+                    match_result = self.match_img(
+                        capture_img=self.paths["screen"],
+                        temp_img=item)
+                    if match_result:
+                        result = False
+                        logger.debug("匹配到其中一张图，退出...")
+                        self.tap(x, y, log)
+                        break
+                    self.sleep(0.1)
+                self.sleep(0.2)
+        else:
+            while True:
+                self.capture_screen()
+                match_result = self.match_img(
+                    capture_img=self.paths["screen"],
+                    temp_img=path)
+                if match_result:
+                    self.tap(x, y, log)
+                    break
+                self.sleep(0.2)
 
     @staticmethod
     def match_img(capture_img, temp_img):
@@ -157,7 +163,6 @@ class Tools(object):
         cropImg = img.crop(self.location_dict[region])
         cropImg.save("img/{}.png".format(region))
         logger.debug("截图已保存")
-
 
     def check_scene(self, scene_name):
         self.capture_screen()
