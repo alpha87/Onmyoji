@@ -1,6 +1,6 @@
 # 阴阳师后台全平台辅助
 
-![screen](https://i.loli.net/2020/10/23/fMiRr75uF93t2o8.jpg)
+![screen](https://i.loli.net/2021/07/06/XMYBNbmcJZlR6rH.jpg)
 
 - Python 版本：Python 3.8
 - 模拟器：[雷电模拟器（推荐）](https://www.ldmnq.com/)｜[网易 MuMu](http://mumu.163.com/)  
