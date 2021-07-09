@@ -189,8 +189,14 @@ class Tools(object):
 
         self.capture_screen()
         img = cv2.imread(self.paths["screen"])
-        # 裁剪坐标为 [y0:y1, x0:x1]
-        cv2.imwrite(self.paths["num"], img[10:40, 829:892])
+
+        if self.get_pixel(559, 473) == (158, 199, 84):
+            logger.critical("呱太入侵！！！")
+            # 裁剪坐标为 [y0:y1, x0:x1]
+            cv2.imwrite(self.paths["num"], img[4:41, 914,981])
+        else:
+            # 裁剪坐标为 [y0:y1, x0:x1]
+            cv2.imwrite(self.paths["num"], img[10:40, 829:892])
         logger.debug("结界券数量图片裁剪完成")
         return True
 
@@ -220,4 +226,4 @@ class Tools(object):
 
 if "__main__" == __name__:
     t = Tools()
-    t.crop_screenshot("remen")
+    t.capture_screen()
