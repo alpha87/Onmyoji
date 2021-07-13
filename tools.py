@@ -216,12 +216,3 @@ class Tools(object):
         result_text = result["TextDetections"][0]["DetectedText"]
         result_text = int(result_text.split("/")[0].replace(" ", ""))
         return result_text
-
-
-if "__main__" == __name__:
-    t = Tools()
-<<<<<<< HEAD
-    t.capture_png()
-=======
-    t.capture_screen()
->>>>>>> 0e60d4f321448788991b07b40c838530d2930f38
