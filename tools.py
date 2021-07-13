@@ -220,4 +220,8 @@ class Tools(object):
 
 if "__main__" == __name__:
     t = Tools()
+<<<<<<< HEAD
     t.capture_png()
+=======
+    t.capture_screen()
+>>>>>>> 0e60d4f321448788991b07b40c838530d2930f38

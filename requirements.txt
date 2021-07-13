@@ -1,3 +1,5 @@
-loguru
+loguru~=0.5.3
 tencentcloud-sdk-python
-opencv-python
+opencv-python~=4.5.2.54
+Pillow~=8.3.0
+numpy~=1.21.0
