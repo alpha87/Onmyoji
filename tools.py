@@ -167,7 +167,7 @@ class Tools(object):
     def check_scene(self, scene_name):
         self.capture_screen()
         img = Image.open(self.paths["screen"])
-        scene_region =self.location_dict[scene_name]
+        scene_region = self.location_dict[scene_name]
         crop_img = np.array(img.crop(scene_region))
         scene_asset = np.array(Image.open(self.paths[scene_name]))
         result = np.array_equal(scene_asset, crop_img)
@@ -189,14 +189,8 @@ class Tools(object):
 
         self.capture_screen()
         img = cv2.imread(self.paths["screen"])
-
-        if self.get_pixel(559, 473) == (158, 199, 84):
-            logger.critical("呱太入侵！！！")
-            # 裁剪坐标为 [y0:y1, x0:x1]
-            cv2.imwrite(self.paths["num"], img[4:41, 914,981])
-        else:
-            # 裁剪坐标为 [y0:y1, x0:x1]
-            cv2.imwrite(self.paths["num"], img[10:40, 829:892])
+        # 裁剪坐标为 [y0:y1, x0:x1]
+        cv2.imwrite(self.paths["num"], img[10:40,914:980])
         logger.debug("结界券数量图片裁剪完成")
         return True
 
@@ -226,4 +220,4 @@ class Tools(object):
 
 if "__main__" == __name__:
     t = Tools()
-    t.capture_screen()
+    t.capture_png()
